@@ -7,4 +7,9 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  extend: {}  
+  ,
+  backgroundImage: {
+    'image': "url('../public/bgImage.jpg')",
+  },
 }
