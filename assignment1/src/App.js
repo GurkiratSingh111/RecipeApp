@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
 import Navbar from "./components/Navbar";
 
 function App() {
+  const [recipe, setRecipe] = useState({});
+  const [allRecipe, setAllRecipe] = useState([])
   return (
     <div className="h-full w-full text-white">
       <Navbar />
@@ -24,6 +27,11 @@ function App() {
             <Input textarea={true} />
             <Header>Directions</Header>
             <Input textarea={true} />
+            <div className="flex flex-row justify-center items-center flex-1">
+            <button className="bg-yellow-950 h-8 w-20 border-solid border-4 border-yellow-950 rounded-3xl hover:bg-yellow-800 hover:border-yellow-800">Reset</button>
+            <button className="bg-yellow-950 h-8 w-20 border-solid border-4 border-yellow-950 rounded-3xl m-3  hover:bg-yellow-800 hover:border-yellow-800">Save</button>
+            </div>
+            
           </div>
         </div>
       </div>
