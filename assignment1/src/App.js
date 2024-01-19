@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import AddRecipe from "./components/AddRecipe";
+import AllRecipe from "./components/AllRecipe";
 
 function App() {
   const [recipe, setRecipe] = useState({});
@@ -17,7 +18,8 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        <AddRecipe/>
+        <AddRecipe  recipe={recipe} setRecipe={setRecipe}/>
+        <AllRecipe/>
       </div>
     </div>
   );
