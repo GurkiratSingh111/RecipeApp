@@ -18,8 +18,8 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        <AddRecipe  recipe={recipe} setRecipe={setRecipe}/>
-        <AllRecipe/>
+        <AddRecipe   allRecipe={allRecipe} setAllRecipe={setAllRecipe} recipe={recipe} setRecipe={setRecipe}/>
+        <AllRecipe allRecipe={allRecipe}/>
       </div>
     </div>
   );
