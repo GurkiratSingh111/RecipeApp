@@ -23,7 +23,13 @@ function App() {
         <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe} recipe={recipe} setRecipe={setRecipe}/>
         <AllRecipe allRecipe={allRecipe}/>
       </div>
-      <ToastContainer/>
+      <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          rtl={false}
+          />
     </div>
   );
 }

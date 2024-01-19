@@ -18,7 +18,7 @@ function AddRecipe({recipe, setRecipe, setAllRecipe, toast}){
     }
     function onSaveHandler(){
         if(recipe.name === ''){
-            toast.error("Please enter a recipe name");
+            toast.error("Please enter a Recipe name");
             return;
         }
         if(recipe.ingredients === ''){
