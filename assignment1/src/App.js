@@ -2,6 +2,8 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import AddRecipe from "./components/AddRecipe";
 import AllRecipe from "./components/AllRecipe";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [recipe, setRecipe] = useState({});
@@ -18,9 +20,10 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        <AddRecipe   allRecipe={allRecipe} setAllRecipe={setAllRecipe} recipe={recipe} setRecipe={setRecipe}/>
+        <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe} recipe={recipe} setRecipe={setRecipe}/>
         <AllRecipe allRecipe={allRecipe}/>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

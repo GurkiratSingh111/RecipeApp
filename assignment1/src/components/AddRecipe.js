@@ -1,7 +1,7 @@
 
 import Header from "./Header"
 
-function AddRecipe({recipe, setRecipe, setAllRecipe, allRecipe}){
+function AddRecipe({recipe, setRecipe, setAllRecipe, toast}){
 
     function nameInputHandler(event){
         setRecipe(recipe => ({...recipe,"name": event.target.value}));
@@ -17,9 +17,21 @@ function AddRecipe({recipe, setRecipe, setAllRecipe, allRecipe}){
 
     }
     function onSaveHandler(){
+        if(recipe.name === ''){
+            toast.error("Please enter a recipe name");
+            return;
+        }
+        if(recipe.ingredients === ''){
+            toast.error("Please enter ingredients for the Recipe");
+            return;
+        }
+        if(recipe.directions === ''){
+            toast.error("Please enter Directions for the Recipe");
+            return;
+        }
         setAllRecipe((allRecipe) => ([...allRecipe, recipe]));
+        toast.success("Recipe Saved Successfully");
         setRecipe({"name": "", "ingredients": "", "directions": ""});
-        console.log(allRecipe);
     }
 
     return  <div className="my-8 pb-5 flex flex-col items-center border-solid border-4 border-yellow-950 rounded-3xl w-4/5 h-full ml-10 mr-10 ">
@@ -27,7 +39,7 @@ function AddRecipe({recipe, setRecipe, setAllRecipe, allRecipe}){
     <div className="flex flex-col w-4/5 items-center">
       <Header>Recipe Name</Header>
       <div className='w-full h-10 text-white'>
-        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 bg-yellow-950' onChange={nameInputHandler} value={recipe.name}/>
+        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 bg-yellow-950' onChange={nameInputHandler} value={recipe.name} arial-label={"Add Recipe Name Here"}/>
       </div>
       <Header>Ingredients</Header>
       <div className='w-full text-white'>
