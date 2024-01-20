@@ -43,11 +43,13 @@ function AddRecipe({recipe, setRecipe, setAllRecipe, toast}){
       </div>
       <Header>Ingredients</Header>
       <div className='w-full text-white'>
-        <textarea type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={ingredientInputHandler} value={recipe.ingredients}/>
+        <textarea rows="5" // Adjust the number of rows as needed
+        cols="30" type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={ingredientInputHandler} value={recipe.ingredients}/>
       </div>
       <Header>Directions</Header>
       <div className='w-full text-white'>
-        <textarea type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={directionInputHandler} value={recipe.directions}/>
+        <textarea rows="5" // Adjust the number of rows as needed
+        cols="30" type="text" className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={directionInputHandler} value={recipe.directions}/>
       </div>
       <div className="flex flex-row justify-center items-center flex-1">
       <button onClick={onResetHandler}
