@@ -1,8 +1,12 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import ShowList from './ShowList';
 
 function RecipeModal({recipe}){
+    const listOfIngredients = recipe.ingredients.split("\n").filter( function(e) { return e.trim().length > 0; } );
+    const listOfDirections = recipe.directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
+
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,11 +20,11 @@ function RecipeModal({recipe}){
     <Modal.Body>
       <div>
         <h4>Ingredients</h4>
-        <p>{recipe.ingredients}</p>
+        <p><ShowList items={listOfIngredients}/></p>
       </div>
         <div>
             <h4>Directions</h4>
-            <p>{recipe.directions}</p>
+            <ShowList items={listOfDirections}/>
         </div>
     </Modal.Body>
     <Modal.Footer>
@@ -33,22 +37,6 @@ function RecipeModal({recipe}){
     <Modal.Header closeButton>
       <Modal.Title>Recipe Name: {recipe.name}</Modal.Title>
     </Modal.Header>
-
-    <Modal.Body>
-      <div>
-        <h4>Ingredients</h4>
-        <p>{recipe.ingredients}</p>
-      </div>
-        <div>
-            <h4>Directions</h4>
-            <p>{recipe.directions}</p>
-        </div>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-        Close
-      </Button>
-    </Modal.Footer>
   </Modal>    
     </> 
 
