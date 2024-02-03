@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header"
 
 function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
   const [name,setName] = useState("");
   const [ingredients,setIngredients] = useState("");
   const [directions,setDirections] = useState("");
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(allRecipe));
+  }, [allRecipe]);
 
     function nameInputHandler(event){
       setName(event.target.value)
@@ -22,7 +25,7 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
         setRecipe({"name": "", "ingredients": "", "directions": ""});
 
     }
-    async function onSaveHandler (){
+    function onSaveHandler (){
         if(name === ''){
             toast.error("Please enter a Recipe name");
             return;
@@ -38,7 +41,8 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
         const listOfIngredients = ingredients.split("\n").filter( function(e) { return e.trim().length > 0; } );
         const listOfDirections = directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
         
-        await setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients: listOfIngredients, directions: listOfDirections}]));
+        
+        setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients: listOfIngredients, directions: listOfDirections}]));
         localStorage.setItem("data", JSON.stringify(allRecipe));
         toast.success("Recipe Saved Successfully");
         setName("");
