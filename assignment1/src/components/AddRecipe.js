@@ -11,15 +11,15 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
 
     function nameInputHandler(event){
       setName(event.target.value)
-        //setRecipe(recipe => ({...recipe,"name": event.target.value}));
+       
     }
     function ingredientInputHandler(event){
       setIngredients(event.target.value)
-        //setRecipe(recipe => ({...recipe,"ingredients": event.target.value}));
+     
     }
     function directionInputHandler(event){
       setDirections(event.target.value);
-        //setRecipe(recipe => ({...recipe,"directions": event.target.value}));
+      
     }
     function onResetHandler(){
         setRecipe({"name": "", "ingredients": "", "directions": ""});
