@@ -8,6 +8,13 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
   useEffect(() => {
     localStorage.setItem("data", JSON.stringify(allRecipe));
   }, [allRecipe]);
+  
+
+  function currentDateAndTime(){
+    var currentdate = new Date();
+    var datetime = "Last Modified: " + currentdate.getDay() + "-" + currentdate.getMonth() + "-" + currentdate.getFullYear() + "  " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+    return datetime;
+    }
 
     function nameInputHandler(event){
       setName(event.target.value)
@@ -42,7 +49,7 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
         const listOfDirections = directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
         
         
-        setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients: listOfIngredients, directions: listOfDirections}]));
+        setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients: listOfIngredients, directions: listOfDirections, lastModified: currentDateAndTime()}]));
         localStorage.setItem("data", JSON.stringify(allRecipe));
         toast.success("Recipe Saved Successfully");
         setName("");
