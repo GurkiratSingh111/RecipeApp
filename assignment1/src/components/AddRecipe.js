@@ -1,37 +1,60 @@
-
+import { useEffect, useState } from "react";
 import Header from "./Header"
 
-function AddRecipe({recipe, setRecipe, setAllRecipe, toast}){
+function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
+  const [name,setName] = useState("");
+  const [ingredients,setIngredients] = useState("");
+  const [directions,setDirections] = useState("");
+  useEffect(() => {
+    localStorage.setItem("data", JSON.stringify(allRecipe));
+  }, [allRecipe]);
+  
+
+  function currentDateAndTime(){
+    var currentdate = new Date();
+    var datetime = "Last Modified: " + currentdate.getDay() + "-" + currentdate.getMonth() + "-" + currentdate.getFullYear() + "  " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+    return datetime;
+    }
 
     function nameInputHandler(event){
-        setRecipe(recipe => ({...recipe,"name": event.target.value}));
+      setName(event.target.value)
+       
     }
     function ingredientInputHandler(event){
-        setRecipe(recipe => ({...recipe,"ingredients": event.target.value}));
+      setIngredients(event.target.value)
+     
     }
     function directionInputHandler(event){
-        setRecipe(recipe => ({...recipe,"directions": event.target.value}));
+      setDirections(event.target.value);
+      
     }
     function onResetHandler(){
         setRecipe({"name": "", "ingredients": "", "directions": ""});
 
     }
-    function onSaveHandler(){
-        if(recipe.name === ''){
+    function onSaveHandler (){
+        if(name === ''){
             toast.error("Please enter a Recipe name");
             return;
         }
-        if(recipe.ingredients === ''){
+        if(ingredients === ''){
             toast.error("Please enter ingredients for the Recipe");
             return;
         }
-        if(recipe.directions === ''){
+        if(directions === ''){
             toast.error("Please enter Directions for the Recipe");
             return;
         }
-        setAllRecipe((allRecipe) => ([...allRecipe, recipe]));
+        const listOfIngredients = ingredients.split("\n").filter( function(e) { return e.trim().length > 0; } );
+        const listOfDirections = directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
+        
+        
+        setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients: listOfIngredients, directions: listOfDirections, lastModified: currentDateAndTime()}]));
+        localStorage.setItem("data", JSON.stringify(allRecipe));
         toast.success("Recipe Saved Successfully");
-        setRecipe({"name": "", "ingredients": "", "directions": ""});
+        setName("");
+        setDirections("")
+        setIngredients("")
     }
 
     return  <div className="my-8 pb-5 flex flex-col items-center border-solid border-4 border-yellow-950 rounded-3xl w-4/5 h-full ml-10 mr-10 ">
@@ -39,17 +62,17 @@ function AddRecipe({recipe, setRecipe, setAllRecipe, toast}){
     <div className="flex flex-col w-4/5 items-center">
       <Header>Recipe Name</Header>
       <div className='w-full h-10 text-white'>
-        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 bg-yellow-950' onChange={nameInputHandler} value={recipe.name} arial-label={"Add Recipe Name Here"}/>
+        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 bg-yellow-950' onChange={nameInputHandler} value={name} arial-label={"Add Recipe Name Here"}/>
       </div>
       <Header>Ingredients</Header>
       <div className='w-full text-white'>
         <textarea rows="5" // Adjust the number of rows as needed
-        cols="30" type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={ingredientInputHandler} value={recipe.ingredients}/>
+        cols="30" type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={ingredientInputHandler} value={ingredients}/>
       </div>
       <Header>Directions</Header>
       <div className='w-full text-white'>
         <textarea rows="5" // Adjust the number of rows as needed
-        cols="30" type="text" className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={directionInputHandler} value={recipe.directions}/>
+        cols="30" type="text" className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y bg-yellow-950' onChange={directionInputHandler} value={directions}/>
       </div>
       <div className="flex flex-row justify-center items-center flex-1">
       <button onClick={onResetHandler}

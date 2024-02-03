@@ -4,8 +4,6 @@ import { useState } from 'react';
 import ShowList from './ShowList';
 
 function RecipeModal({recipe}){
-    const listOfIngredients = recipe.ingredients.split("\n").filter( function(e) { return e.trim().length > 0; } );
-    const listOfDirections = recipe.directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
 
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false);
@@ -19,12 +17,13 @@ function RecipeModal({recipe}){
 
     <Modal.Body>
       <div>
+        <p>{recipe.lastModified}</p>
         <h4>Ingredients</h4>
-        <p><ShowList items={listOfIngredients}/></p>
+        <p><ShowList items={recipe.ingredients}/></p>
       </div>
         <div>
             <h4>Directions</h4>
-            <ShowList items={listOfDirections}/>
+            <ShowList items={recipe.directions}/>
         </div>
     </Modal.Body>
     <Modal.Footer>

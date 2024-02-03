@@ -6,8 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [recipe, setRecipe] = useState({});
-  const [allRecipe, setAllRecipe] = useState([]);
+  const [allRecipe, setAllRecipe] = useState(localStorage.getItem("data") === null || undefined ? [] : JSON.parse(localStorage.getItem("data")));
   return (
     <div className="h-full w-full text-white">
       <Navbar />
@@ -20,7 +19,7 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe} recipe={recipe} setRecipe={setRecipe}/>
+        <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe}/>
         <AllRecipe allRecipe={allRecipe}/>
       </div>
       <ToastContainer
