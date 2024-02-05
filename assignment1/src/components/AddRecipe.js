@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./Header"
 
-function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
+function AddRecipe({ allRecipe, setAllRecipe, toast}){
   const [name,setName] = useState("");
   const [ingredients,setIngredients] = useState("");
   const [directions,setDirections] = useState("");
@@ -29,8 +29,9 @@ function AddRecipe({recipe, allRecipe, setRecipe, setAllRecipe, toast}){
       
     }
     function onResetHandler(){
-        setRecipe({"name": "", "ingredients": "", "directions": ""});
-
+        setName("");
+        setDirections("")
+        setIngredients("")
     }
     function onSaveHandler (){
         if(name === ''){
