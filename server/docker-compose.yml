@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  server:
+    platform: linux/amd64
+    build: . 
+    ports:
+      - "8081:8080"
+  db:
+    platform: linux/amd64
+    image: "postgres"
+    ports: 
+      - "4444:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+
