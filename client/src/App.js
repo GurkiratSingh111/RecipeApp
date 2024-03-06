@@ -8,11 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const [allRecipe, setAllRecipe] = useState(localStorage.getItem("data") === null || undefined ? [] : JSON.parse(localStorage.getItem("data")));
   return (
-    <div className="h-full w-full text-white">
+    <div className="h-full w-full text-white font-serif">
       <Navbar />
       <div className="flex h-auto">
       <div
-        className="flex flex-col items-center px-10 opacity-90"
+        className="flex flex-col items-center px-10"
         style={{
           backgroundImage: `url('bgImage.jpg')`,
           backgroundPosition: "left",
@@ -22,7 +22,7 @@ function App() {
           height: "100%"
         }}
       >
-      <div style={{width: "100%", paddingTop:"40px"}} className="flex pl-60 pr-2">
+      <div style={{width: "100%", paddingTop:"40px"}} className="flex lg: lg:pr-2 sm:justify-center">
          <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe}/>
          {/* <AllRecipe allRecipe={allRecipe}/> */}
       </div>
