@@ -19,21 +19,15 @@ function App() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
-          height: "100%"
+          height: "100%",
+          padding: "60px",
         }}
       >
       <div style={{width: "100%", paddingTop:"40px"}} className="flex lg: lg:pr-2 sm:justify-center">
          <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe}/>
-         {/* <AllRecipe allRecipe={allRecipe}/> */}
       </div>
-
       </div>
-     
-        
-      
       </div>
-      
-    
       <ToastContainer
           position="top-center"
           autoClose={3000}
