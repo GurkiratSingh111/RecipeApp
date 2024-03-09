@@ -16,7 +16,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-function getCurrentTime(date){
+function getCurrentTime(){
+    date = new Date();
+    console.log("The date is here", date);
     const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     return `${date.getFullYear()}, ${date.getDate()}th ${month[date.getMonth()]}, ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 }
@@ -40,8 +42,7 @@ const helper = {
         await pool.query(q);
     },
     add: async function(name, instructions, ingredients){
-        let date = new Date();
-        date = getCurrentTime(date);
+        date = getCurrentTime();
 
         const q = `INSERT INTO 
                     recipes(name, instructions, timeLastModified) 
@@ -59,12 +60,14 @@ const helper = {
         await pool.query(q,[id]);
     },
     update: async function(id,name, ingredients, instructions){
+        date = getCurrentTime();
         const q1 = `UPDATE recipes 
                     SET name = $1, 
-                    instructions = $2 
-                    WHERE id = $3`;
+                    instructions = $2,
+                    timeLastModified = $3
+                    WHERE id = $4`;
 
-        await pool.query(q1,[name,instructions,id]);
+        await pool.query(q1,[name,instructions,date,id]);
 
         const q2 = `DELETE FROM ingredients
                     WHERE recipeId = $1`
