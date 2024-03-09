@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import Header from "./Header"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function AddRecipe({ allRecipe, setAllRecipe, toast}){
+function AddRecipe({toast, recipeData}){
+  const navigate = useNavigate()
   const [name,setName] = useState("");
   const [ingredients,setIngredients] = useState("");
   const [instructions,setInstructions] = useState("");
+  const [title, setTitle] = useState("Add New");
   useEffect(() => {
-    localStorage.setItem("data", JSON.stringify(allRecipe));
-  }, [allRecipe]);
+    if(recipeData !== null){
+      setName(recipeData?.result1?.name)
+      setIngredients(recipeData?.result2?.map((value)=>{return value["name"]}).join(","))
+      setInstructions(recipeData?.result1?.instructions)
+      setTitle("Edit");
+    }
+  }, [recipeData])
   
 
   function currentDateAndTime(){
@@ -18,16 +26,13 @@ function AddRecipe({ allRecipe, setAllRecipe, toast}){
     }
 
     function nameInputHandler(event){
-      setName(event.target.value)
-       
+        setName(event.target.value)
     }
     function ingredientInputHandler(event){
-      setIngredients(event.target.value)
-     
+        setIngredients(event.target.value)
     }
     function instructionInputHandler(event){
-      setInstructions(event.target.value);
-      
+        setInstructions(event.target.value);
     }
     function onResetHandler(){
         setName("");
@@ -47,15 +52,22 @@ function AddRecipe({ allRecipe, setAllRecipe, toast}){
             toast.error("Please enter Directions for the Recipe");
             return;
         }
-        const response = await axios.post('http://localhost:8081/add', {name, ingredients, instructions});
-        console.log(response);
+        if(title == "Edit"){
+          const response = await axios.post(`http://localhost:8081/update/${recipeData.result1?.id}`, { name, ingredients, instructions});
+          console.log(response);
 
+        }
+        else{
+          const response = await axios.post('http://localhost:8081/add', {name, ingredients, instructions});
+        }
+        navigate("/recipes")
+        
         // const listOfIngredients = ingredients.split("\n").filter( function(e) { return e.trim().length > 0; } );
         // const listOfDirections = directions.split("\n").filter( function(e) { return e.trim().length > 0; } );
         
         
-        setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients, instructions}]));
-        localStorage.setItem("data", JSON.stringify(allRecipe));
+        //setAllRecipe((allRecipe) => ([...allRecipe,{ name, ingredients, instructions}]));
+        //localStorage.setItem("data", JSON.stringify(allRecipe));
         toast.success("Recipe Saved Successfully");
         setName("");
         setInstructions("")
@@ -63,7 +75,7 @@ function AddRecipe({ allRecipe, setAllRecipe, toast}){
     }
 
     return  <div className="pb-2 pl-4 flex flex-col items-center rounded-3xl w-4/5" style={{width:"80%"}}>
-    <Header mainHeading={true}>Add New Recipe</Header>
+    <Header mainHeading={true}>{title} Recipe</Header>
     <div className="flex flex-col w-4/5 items-center">
       <Header>Recipe Name</Header>
       <div className='w-full h-10 text-black'>
