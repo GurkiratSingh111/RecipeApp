@@ -55,16 +55,16 @@ function RecipeModal({recipe, updatedRecipes}){
 
     <Modal.Body>
       <div>
-        <p>{recipeData.result1.timelastmodified}</p>
+        <p>{recipeData?.result1?.timelastmodified}</p>
         <h4>Ingredients</h4>
-        <p>{recipeData.result2.map((value)=>{
+        <p>{recipeData?.result2?.map((value)=>{
           return <p>{value["name"]}</p>
         })}</p>
         {/* <p><ShowList items={recipe.ingredients}/></p> */}
       </div>
         <div>
             <h4>Directions</h4>
-            <p>{recipeData.result1.instructions}</p>
+            <p>{recipeData?.result1?.instructions}</p>
             {/* <ShowList items={recipe.directions}/> */}
         </div>
     </Modal.Body>
@@ -78,7 +78,7 @@ function RecipeModal({recipe, updatedRecipes}){
     <Modal.Header closeButton>
       <Modal.Title>Recipe Name: {recipe.name}</Modal.Title>
     </Modal.Header>
-  </Modal>    
+  </Modal>   
     </> 
 
 }

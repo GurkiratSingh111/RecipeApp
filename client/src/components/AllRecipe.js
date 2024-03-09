@@ -44,6 +44,4 @@ function AllRecipe(){
 }</div>
 </div>
 }
-
-
 export default AllRecipe;
