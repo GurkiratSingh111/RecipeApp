@@ -4,9 +4,26 @@ import AddRecipe from "./components/AddRecipe";
 import AllRecipe from "./components/AllRecipe";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+
+
 
 function App() {
-  const [allRecipe, setAllRecipe] = useState(localStorage.getItem("data") === null || undefined ? [] : JSON.parse(localStorage.getItem("data")));
+  //const [recipeData,setRecipeData] = useState({});
+  const location = useLocation();
+  const data = location.state;
+  // useEffect(() => {
+  //  if(data !== undefined){
+  //   fetchRecipeById();
+  //  }
+  //  async function fetchRecipeById(){
+  //   const response = await axios.get(`http://localhost:8081/recipe/${data?.id}`);
+  //   console.log("here lolal",response.data);
+  //   setRecipeData(response.data)
+  //  }
+  // }, [data])
   return (
     <div className="h-full w-full text-white font-serif">
       <Navbar />
@@ -24,7 +41,7 @@ function App() {
         }}
       >
       <div style={{width: "100%", paddingTop:"40px"}} className="flex lg: lg:pr-2 sm:justify-center">
-         <AddRecipe  toast={toast} allRecipe={allRecipe} setAllRecipe={setAllRecipe}/>
+         <AddRecipe  recipeData={data} toast={toast}/>
       </div>
       </div>
       </div>
