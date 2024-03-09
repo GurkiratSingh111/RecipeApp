@@ -1,13 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const {Pool} = require("pg");
+import pool from "./db/connect";
+// const {Pool} = require("pg");
   
-const pool = new Pool({
-    user: "postgres",
-    host: "db",
-    password: "root",
-})
+// const pool = new Pool({
+//     user: "postgres",
+//     host: "db",
+//     password: "root",
+// })
+
 const PORT = 8080;
 const app = express();
 dotenv.config();
