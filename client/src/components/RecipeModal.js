@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import ShowList from './ShowList';
 import { MdDelete, MdEdit } from "react-icons/md";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function RecipeModal({recipe, updatedRecipes}){
+    const navigate = useNavigate();
   const [recipeData, setRecipeData] = useState({});
   useEffect(() => {
     async function fetchRecipeById(){
@@ -31,7 +33,7 @@ function RecipeModal({recipe, updatedRecipes}){
     deleteRequest();
   }
   const onClickEditRecipe = () => {
-    
+    navigate("/",{state:recipeData})
   }
 
 
