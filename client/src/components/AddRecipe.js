@@ -79,17 +79,17 @@ function AddRecipe({toast, recipeData}){
     <div className="flex flex-col w-4/5 items-center">
       <Header>Recipe Name</Header>
       <div className='w-full h-10 text-black'>
-        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 border-solid border-black border-2' onChange={nameInputHandler} value={name} arial-label={"Add Recipe Name Here"}/>
+        <input type="text" className='w-full rounded-3xl h-full color-blue pl-5 border-solid border-black border-2' onChange={nameInputHandler} value={name}/>
       </div>
       <Header>Ingredients</Header>
       <div className='w-full text-black'>
         <textarea rows="5" // Adjust the number of rows as needed
-        cols="30" type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y border-solid border-black border-2' onChange={ingredientInputHandler} value={ingredients}/>
+        cols="30" type="text"  className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y border-solid border-black border-2' onChange={ingredientInputHandler} value={ingredients} placeholder="Separate Ingredients by a Comma..."/>
       </div>
       <Header>Directions</Header>
       <div className='w-full text-black'>
         <textarea rows="5" // Adjust the number of rows as needed
-        cols="30" type="text" className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y border-solid border-black border-2' onChange={instructionInputHandler} value={instructions}/>
+        cols="30" type="text" className='w-full rounded-3xl min-h-30 max-h-50 color-blue pl-8 pt-2 resize-y border-solid border-black border-2' onChange={instructionInputHandler} value={instructions} placeholder=""/>
       </div>
       <div className="flex flex-row justify-center items-center flex-1">
       <button onClick={onResetHandler}
