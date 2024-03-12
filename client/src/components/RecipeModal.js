@@ -1,7 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
-import ShowList from './ShowList';
 import { MdDelete, MdEdit } from "react-icons/md";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
