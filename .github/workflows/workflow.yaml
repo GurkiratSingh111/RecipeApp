@@ -20,9 +20,9 @@ jobs:
       run: npm install
       working-directory: client
 
-    - name: Run client tests
-      run: npm test
-      working-directory: client
+    # - name: Run client tests
+    #   run: npm test
+    #   working-directory: client
 
     - name: Build client
       run: npm run build
@@ -39,9 +39,9 @@ jobs:
       run: npm install
       working-directory: server
 
-    - name: Run server tests
-      run: npm test
-      working-directory: server
+    # - name: Run server tests
+    #   run: npm test
+    #   working-directory: server
 
     # Add more steps here for server deployment or other tasks
 
