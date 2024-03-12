@@ -17,13 +17,7 @@ function AddRecipe({toast, recipeData}){
       setTitle("Edit");
     }
   }, [recipeData])
-  
 
-  function currentDateAndTime(){
-    var currentdate = new Date();
-    var datetime = "Last Modified: " + currentdate.getDay() + "-" + currentdate.getMonth() + "-" + currentdate.getFullYear() + "  " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-    return datetime;
-    }
 
     function nameInputHandler(event){
         setName(event.target.value)
@@ -52,13 +46,13 @@ function AddRecipe({toast, recipeData}){
             toast.error("Please enter Directions for the Recipe");
             return;
         }
-        if(title == "Edit"){
+        if(title === "Edit"){
           const response = await axios.post(`http://localhost:8081/update/${recipeData.result1?.id}`, { name, ingredients, instructions});
           console.log(response);
 
         }
         else{
-          const response = await axios.post('http://localhost:8081/add', {name, ingredients, instructions});
+          await axios.post('http://localhost:8081/add', {name, ingredients, instructions});
         }
         navigate("/recipes")
         

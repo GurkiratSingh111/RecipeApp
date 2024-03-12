@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "./Header";
 import RecipeModal from "./RecipeModal";
 import axios from 'axios';
 
@@ -32,7 +31,7 @@ function AllRecipe(){
       }}>
         {/* <Header mainHeading={true}>Find your Saved Recipes Here</Header> */}
         <div className="my-3 py-3 flex flex-col items-center w-4/5 h-full ml-40 pl-9 mr-10" >
-            {allRecipe.length == 0 && <h1 className="text-4xl text-black flex justify-center items-center flex-1">No Recipes Found!!🥺</h1>}
+            {allRecipe.length === 0 && <h1 className="text-4xl text-black flex justify-center items-center flex-1">No Recipes Found!!🥺</h1>}
             {allRecipe.length !== 0 && allRecipe.map((recipe,index)=>{
                 console.log(recipe)
                 return (
