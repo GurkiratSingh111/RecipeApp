@@ -33,6 +33,3 @@ jobs:
       run: |
         docker build -t ${{ secrets.DOCKER_USERNAME }}/recipe-app-client:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/recipe-app-client:latest
-
-    - name: Deploy with docker-compose
-      run: docker-compose up -d
