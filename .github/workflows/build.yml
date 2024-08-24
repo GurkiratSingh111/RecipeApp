@@ -39,4 +39,4 @@ jobs:
 
     - name: Install Frontend Dependencies
       run: npm install
-      working-directory: ./server
+      working-directory: ./client
