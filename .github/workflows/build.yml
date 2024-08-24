@@ -20,9 +20,8 @@ jobs:
         node-version: '18.17'
 
     - name: Install Backend Dependencies
-      run: |
-        cd server
-        npm install
+      run: npm install
+      working-directory: ./server
 
   frontend-build:
     name: Frontend Build and Test
@@ -39,6 +38,5 @@ jobs:
         node-version: '18.17'
 
     - name: Install Frontend Dependencies
-      run: |
-        cd client
-        npm install
+      run: npm install
+      working-directory: ./server
