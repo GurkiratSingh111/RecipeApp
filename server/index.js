@@ -11,6 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", recipeRoutes)
+
+
+
+
+
+
 recipeDatabase().then(()=>{
     ingredientsDatabase().then(()=>{
         app.listen(PORT,'0.0.0.0');
