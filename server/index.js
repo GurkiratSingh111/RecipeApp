@@ -4,12 +4,13 @@ const recipeDatabase =  require("./models/RecipeModel");
 const ingredientsDatabase = require( "./models/IngredientModel");
 const  recipeRoutes = require("./routes/recipeRoutes");
 const PORT = 8080;
-
 const app = express();
+
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 app.use("/", recipeRoutes)
 recipeDatabase().then(()=>{
