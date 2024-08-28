@@ -1,4 +1,4 @@
-name: Backend CI
+name: CI Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  backend-build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,19 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
+    - name: Install dependencies for server
       working-directory: server
       run: npm install
+      
+    - name: Install dependencies for client
+      working-directory: client
+      run: npm install
 
+    - name: Build
+      working-directory: client
+      run: npm run build
+
+    
+  
+
+  
