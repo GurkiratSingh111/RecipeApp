@@ -41,11 +41,12 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          sudo docker network create recipe-network || true
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/recipe-app-server:latest
           sudo docker stop recipe-app-server || true
           sudo docker rm recipe-app-server || true
-          sudo docker run -d --name postgres-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -e POSTGRES_DB=recipe_db -p 5432:5432 postgres
-          sudo docker run -d --name recipe-app-server -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/recipe-app-server:latest
+          sudo docker run -d --name postgres-db --network recipe-network -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -e POSTGRES_DB=recipe_db -p 5432:5432 postgres
+          sudo docker run -d --name recipe-app-server --network recipe-network -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/recipe-app-server:latest
   # - name: Deploy FRONTEND to S3
   #     run: |
   #       aws s3 sync ./client/build s3://${{ secrets.S3_BUCKET_NAME }} --delete

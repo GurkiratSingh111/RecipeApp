@@ -1,9 +1,7 @@
-const {Pool} = require("pg");
-  
+const { Pool } = require("pg");
+
 const pool = new Pool({
-    user: "postgres",
-    host: "db",
-    password: "root",
-})
+    connectionString: "postgresql://postgres:root@db:5432/recipe_db"
+});
 
 module.exports = pool;
